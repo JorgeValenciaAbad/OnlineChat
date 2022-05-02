@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Roboto&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Grape Nuts';
+}
+
+h4,
+p {
+    font-family: 'Roboto';
+}
+
+.cover-container {
+    height: 100vh;
+    width: 100%;
+    object-fit: contain;
+    background-color: rgb(22, 22, 22, 0.3);
+}
+
+.normalHeader {
+    background-color: #161616;
+}
+
+.video {
+    object-fit: cover;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    z-index: -1;
+}
+
+header {
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Roboto';
+
+
+}
+
+.title {
+    display: flex;
+
+}
+
+.title img {
+    max-width: 50px;
+}
+
+.title h1,
+.cover-container h1 {
+
+    color: aliceblue;
+}
+
+.cover-container2 {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2rem;
+    height: 100vh;
+}
+
+.image img {
+    max-width: 900px;
+    margin: 2rem;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+}
+
+.info>h1 {
+    font-size: 4rem;
+    color: aliceblue;
+}
+
+.info>p {
+    font-size: 2rem;
+    color: aliceblue;
+}
+
+
+.hidden {
+    display: none;
+}
+.hambur-logo{
+    color: aliceblue;
+    font-size: 2.5em;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0 2rem;
+    font-size: 3rem;
+    margin: 2rem;
+}
+
+nav .active {
+    color: rgb(225, 146, 0);
+    font-weight: bold;
+
+}
+
+.form-register {
+    max-width: 400px;
+    padding: 1rem;
+    margin: auto;
+    font-family: "Roboto";
+}
+
+.form-register h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.inputs {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+
+}
+
+.form-register button {
+    width: 100%;
+    margin: 1rem 0;
+    padding: 00.5rem;
+}
