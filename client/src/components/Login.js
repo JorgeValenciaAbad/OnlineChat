@@ -1,26 +1,28 @@
 import React from "react";
-import Header from "./Header";
+//import Header from "./Header";
 import { useForm } from "react-hook-form";
-
-// import {useForm} from "react-hook-form";
+import md5 from "md5";
+import { useNavigate } from "react-router";
+import Header from "./Header";
 
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
+    const navigate = useNavigate();
     const OnSubmit = async(datos) =>{
+        const login = datos;
          const response =  await fetch("http://localhost:3000/users");
          await response.json().then(data =>{
              for (const user of data) {
-                 if (user.names == datos.names && user.passwd == datos.passwd ) {
-                    console.log("Has Iniciado Sesión");
+                 if (user.names == login.names && user.passwd == md5(login.passwd)) {
+                    navigate("/chat", { replace: true });
                  }
-                 console.log("error");
-             }
+            }
          })
      };
     return <>
+    <Header/>
     <div className="normalHeader">
-        <Header />
     </div>
     <form onSubmit={handleSubmit(OnSubmit)}>
         <section className="form-register">

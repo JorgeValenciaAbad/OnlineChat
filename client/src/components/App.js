@@ -9,15 +9,15 @@ import {
     } from "react-router-dom";
 
 function App(){
-    return(
+    return( <>
         <Router>
             <Routes>
                 <Route path="/" element={<Cover/>}/>
                 <Route path="/register" element={<Register/>}/>
-                <Route path="/login" element={<Login/>}/> 
+                <Route path="/login" element={<Login/>}/>  
             </Routes>
                            
         </Router>
-    )  
+    </>)
 }
 export default App

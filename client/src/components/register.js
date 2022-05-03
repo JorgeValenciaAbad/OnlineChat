@@ -1,32 +1,33 @@
 import React from "react";
-import Header from "./Header"
+//import Header from "./Header"
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import Header from "./Header";
 
 
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const navigate = useNavigate();
     const onSubmit = async (data, event) => {
         event.preventDefault();
-       
         try {
             const response = await fetch("http://localhost:3000/users", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data)
             });
-            console.log(response)
+            console.log(response);
+            if (response.status===200) {
+                navigate("/login",{ replace: true } )
+            }
+            navigate("/login",{replace: true});
         } catch (error) {
             console.log(error.message)
         }
     } 
-    const ToLogin = () =>{
-         const navigate = useNavigate();
-         navigate("/login",{replace: true});
-    }
     return <>
+    <Header/>
         <div className="normalHeader">
-            <Header />
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
 
