@@ -1,5 +1,5 @@
 import React from "react";
-import Cover from "./Cover"
+import Home from "./Home"
 import Register from "./register"
 import Login from "./Login"
 import {
