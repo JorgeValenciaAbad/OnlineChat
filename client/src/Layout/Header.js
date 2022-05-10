@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import foto from "../images/logo.png";
+import foto from "../assets/images/logo.png";
 import { FiAlignJustify } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
-import {Menu}  from "./MenuElements"
-const Header = () => {
+import { Menu } from "./MenuElements";
+export const Header = () => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     return <header>
         <div className="title">
@@ -20,6 +20,4 @@ const Header = () => {
             <NavLink exact to="/login" className={(navData) => (navData.isActive ? "active" : '')}>Log In</NavLink>
         </Menu>
     </header>;
-
 }
-export default Header;

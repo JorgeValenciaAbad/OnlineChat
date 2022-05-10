@@ -1,7 +1,6 @@
 import React from "react";
-import video from "../video/video.mp4";
-import Header from "./Header"
-
+import video from "../assets/video/video.mp4";
+import { Header } from '../Layout/Header';
 
 
 const Cover = () => {

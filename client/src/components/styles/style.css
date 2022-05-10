@@ -41,7 +41,10 @@ p {
     position: absolute;
     z-index: -1;
 }
-
+main{
+    height: 70vh;
+    margin: 2.55rem;
+}
 header {
     padding: 2rem;
     display: flex;
@@ -118,6 +121,22 @@ nav .active {
     font-weight: bold;
 
 }
+footer{
+    background-color: #161616;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+}
+.footer-item{
+    padding: 2rem;
+    color:white;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-around;
+    max-width: 300px;
+    width: 100%;
+}
+
 
 .form-register {
     max-width: 400px;
