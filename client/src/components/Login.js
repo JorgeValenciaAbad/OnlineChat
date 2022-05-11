@@ -3,18 +3,24 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { Header } from '../Layout/Header';
 import { Footer } from '../Layout/footer';
+import Cookies from 'universal-cookie';
 import md5 from "md5";
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
+    const cookies = new Cookies();
     const OnSubmit = async (datos) => {
-        await fetch("http://localhost:3000/users").json().then(data => {
+        const response = await fetch("http://localhost:3000/users")
+        await response.json().then(data => {
             const login = datos
             for (const user of data) {
                 if (user.names === login.names && user.passwd === md5(login.passwd)) {
 
-                    navigate("/chat", { replace: true })
+                   
+                    cookies.set("user", user, {path:'/'})
+                    navigate("/", { replace: true })
+                    
                 }
             }
         })
