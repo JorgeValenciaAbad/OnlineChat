@@ -7,9 +7,10 @@ import {
     Routes,
     Route
 } from "react-router-dom";
-
+import { UserContext } from "../context/UserContext";
 function App() {
     return (<>
+        <UserContext>
             <Router>
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -18,6 +19,7 @@ function App() {
                 </Routes>
 
             </Router>
+        </UserContext>
     </>)
 }
 export default App

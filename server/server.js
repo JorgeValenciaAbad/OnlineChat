@@ -40,6 +40,16 @@ app.get("/users/:id", async (req, res) => {
     }
 
 })
+app.get("/api/login", async (req, res) => {
+    try {
+        const {names, passwd}  = req.params;
+        const newTodo = await pool.query("SELECT * FROM users WHERE names = $1 AND passwd = $2", [names, passwd]);
+        res.json(newTodo.rows[0]);
+    } catch (err) {
+        console.log(err);
+    }
+
+})
 /*app.get("/messages", async (req, res) => {
     try {
         const newTodo = await pool.query("SELECT * FROM users");

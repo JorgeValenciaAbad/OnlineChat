@@ -3,41 +3,37 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { Header } from '../Layout/Header';
 import { Footer } from '../Layout/footer';
-import Cookies from 'universal-cookie';
-import md5 from "md5";
+import { useState } from "react";
+import useUser from '../hooks/useUser'
+import { useEffect } from "react";
 
 const Login = () => {
-    const { register, handleSubmit } = useForm();
+    const { register } = useForm();
+    const [names, setUsername] = useState();
+    const [passwd, setPassword] = useState();
+    const { isLogged,login} = useUser();
     const navigate = useNavigate();
-    const cookies = new Cookies();
-    const OnSubmit = async (datos) => {
-        const response = await fetch("http://localhost:3000/users")
-        await response.json().then(data => {
-            const login = datos
-            for (const user of data) {
-                if (user.names === login.names && user.passwd === md5(login.passwd)) {
+    useEffect(() => {
+        if (isLogged) navigate("/")
+    },[isLogged, navigate])
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        login();
 
-                   
-                    cookies.set("user", user, {path:'/'})
-                    navigate("/", { replace: true })
-                    
-                }
-            }
-        })
-        navigate("/login", { replace: true });
+        //navigate ("/")
     };
     return (<>
         <Header />
         <main>
             <div className="normalHeader">
             </div>
-            <form onSubmit={handleSubmit(OnSubmit)}>
+            <form onSubmit={handleSubmit}>
                 <section className="form-register">
                     <h1>Log In</h1>
                     <label htmlFor="userName">User Name</label>
-                    <input className="inputs" type="text" {...register("names")} id="userName" placeholder="User Name" />
+                    <input className="inputs" type="text" {...register("names")} onChange={(e) => setUsername(e.target.value)} value={names} id="userName" placeholder="User Name" />
                     <label htmlFor="passwd">Password</label>
-                    <input className="inputs" type="password" {...register("passwd")} id="passwd" placeholder="Password" />
+                    <input className="inputs" type="password" {...register("passwd")} onChange={(e) => setPassword(e.target.value)} value={passwd} id="passwd" placeholder="Password" />
                     <button type="submit">Log In</button>
                 </section>
             </form>
