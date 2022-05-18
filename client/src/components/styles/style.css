@@ -90,17 +90,28 @@ header {
     height: 80%;
 }
 
-.info>h1 {
+.info h1 {
     font-size: 4rem;
     color: aliceblue;
 }
 
-.info>p {
+.info p {
     font-size: 2rem;
     color: aliceblue;
 }
 
+@media (max-width: 600px) {
 
+    .info h1 {
+        font-size: 2rem;
+        color: aliceblue;
+    }
+    
+    .info p {
+        font-size: 1rem;
+        color: aliceblue;
+    }
+    }
 .hidden {
     display: none;
 }
@@ -108,12 +119,14 @@ header {
     color: aliceblue;
     font-size: 2.5em;
 }
-nav a {
+nav a , nav button{
     color: white;
     text-decoration: none;
     padding: 0 2rem;
-    font-size: 3rem;
+    font-size: 2rem;
     margin: 2rem;
+    background: none;
+    border: none;
 }
 
 nav .active {
@@ -163,4 +176,8 @@ footer{
     width: 100%;
     margin: 1rem 0;
     padding: 0 0.5rem;
+}
+.error{
+    color:red;
+    font-weight: bold;
 }

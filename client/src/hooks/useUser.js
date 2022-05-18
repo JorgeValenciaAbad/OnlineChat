@@ -1,39 +1,54 @@
 
-import { useContext, useCallback } from 'react'
+import { useContext, useCallback, useState } from 'react'
 import Context from '../context/UserContext'
-import {loginService} from '../service/login'
 
 export default function useUser() {
     const { jwt, setJWT } = useContext(Context);
+    const [state, setState] = useState({ loading: false, error: false })
 
-   const login = useCallback(({ names, passwd }) => {
+    const login = async (names, passwd) => {
+        
+        if (names != "" && passwd != "") {
+            setState({ loading: true, error: false })
+            const res = await fetch("http://localhost:3000/api/login", {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ names, passwd })
+            }).then(res => {
+                if (!res.ok) {
+                    setState({ loading: false, error: true })
+                    window.sessionStorage.removeItem("jwt")
+                    throw new Error('Response is NOT ok')
+                }
+                return res.json()
 
-        loginService({ names, passwd }).then(token => {
-
-            console.log(token)
-            setJWT(token)
-
-        }).catch(err =>
-
-            console.error(err)
-
-        )
-    }, [setJWT]);
-     /*const login = useCallback(() => {
-
-        setJWT("test")
-
-    }, [setJWT]);*/
+            }).then(res => {
+                setState({ loading: false, error: false })
+                setJWT(res);
+                window.sessionStorage.setItem("jwt", res)
+            }).catch(err =>{
+                window.sessionStorage.removeItem("jwt")
+                setState({ loading: false, error: true });
+                console.log(err)
+            })
+        }
+        setState({ loading: false, error: true })
+    }
 
     const logout = useCallback(() => {
 
         setJWT(null)
+        window.sessionStorage.removeItem("jwt")
 
     }, [setJWT]);
 
     return {
 
         isLogged: Boolean(jwt),
+        hasLoginError: state.error,
+        isLoading: state.loading,
         login,
         logout
 
