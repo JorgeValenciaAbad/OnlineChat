@@ -15,7 +15,6 @@ const Login = () => {
     },[isLogged, navigate])
 
     const onSubmit = (datos) => {
-        console.log(datos);
         login(datos.names,datos.passwd);
     };
     return (<>

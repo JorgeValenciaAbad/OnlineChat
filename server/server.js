@@ -2,10 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import pool from "./database/index.js"
 import jwt from 'jsonwebtoken';
-import { throws } from 'assert';
-import { error } from 'console';
 import md5 from 'md5';
-//middlewar
+//middleware
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -44,41 +42,44 @@ app.get("/users/:id", async (req, res) => {
 })
 
 app.post("/api/login", async (req, res) => {
-    // try {
-    //     const {names, passwd}  = req.params; 
-    //     const newTodo = await pool.query("SELECT * FROM users WHERE names= $1::text AND passwd=md5($2::text);", [names, passwd]);
-    //     console.log (newTodo.rows[0])
-    //     const user = {
-    //         name : names,
-    //         id : newTodo.rows[0]
-    //     };
-    //     const token = jwt.sign(user,"123");
-    //     res.json(token)
+    try {
+        const { names, passwd } = req.body;
+        const newTodo = await pool.query("SELECT id, names ,email FROM users WHERE names=$1 AND passwd=md5($2);", [names, passwd]);
+        if (newTodo.rowCount > 0) {
+            const token = jwt.sign(newTodo.rows[0], "123");
+            res.json(token)
+        }
+        res.status(404).json()
+    } catch (err) {
+        console.log(err);
+    }
+})
 
-    // } catch (err) {
-    //     console.log(err);
-    // }
-    // try {
-    //     const { names, passwd } = req.params;
-    //     const users = await fetch("http://localhost:3000/users");
-    //     await users.json().then(data => {
-    //         for (const user of data) {
-    //             if (user.names === names && user.passwd === md5(passwd)) {
-    //                 const user = {
-    //                     id: user.id,
-    //                     name: user.name,
-    //                     email: user.email
-    //                 };
-    //                     const token = jwt.sign(user,"123");
-    //                     res.json(token)
-    //             } 
-    //         }
-    //     })
-
-    // } catch (error) {
-    //     console.log(error);
-    // // }
-         
+app.post("/api/update", async (req, res) => {
+    try {
+        const { names, email, passwd, token } = req.body;
+        console.log(token)
+        const user = jwt.decode(token);
+        const id = user.id;
+        await pool.query("UPDATE users SET names = $1, email = $2 ,passwd = md5($3) WHERE id = $4;", [names, email, passwd, id]);
+        user.names = names;
+        user.email = email;
+        user.passwd = md5(passwd);
+        const newToken = jwt.sign(user,"123");
+        res.json(newToken);
+    } catch (err) {
+        console.log(err)
+    }
+})
+app.post("/api/user", async (req, res) => {
+    try {
+        const {token } = req.body;
+        console.log(token)
+        const user = jwt.decode(token);
+        res.json(user);
+    } catch (err) {
+        console.log(err)
+    }
 })
 app.use(express.static(process.cwd() + "/client/build"))
 

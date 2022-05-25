@@ -1,35 +1,34 @@
 import React from "react";
+import { Footer } from "../Layout/footer";
+import { Header } from "../Layout/Header";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
-import { Header } from '../Layout/Header';
-import { Footer } from '../Layout/footer';
-
-const Register = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
+import useUser from "../hooks/useUser";
+const Profile = () => {
+    const { isLogged, isUpdate, update } = useUser();
     const navigate = useNavigate();
-    const onSubmit = async (data, event) => {
-        event.preventDefault();
-        try {
-            const response = await fetch("http://localhost:3000/users", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            });
-            if (response.status === 200) {
-                navigate("/login", { replace: true })
-            }
-            navigate("/register", { replace: true });
-        } catch (error) {
-            console.log(error.message)
+    const { register, formState: { errors }, handleSubmit } = useForm();
+    useEffect(() => {
+        if (!isLogged) {
+            alert("You have to log in to access this part of the page.")
+            navigate("/login")
         }
+    }, [isLogged, navigate])
+    const onSubmit = async (data, event)=>{
+        event.preventDefault();
+        update(data.names, data.passwd, data.email);
+        alert("Cambios realizados con exito")
+        navigate("/login")
     }
-    return <>
+    return (<>
+
         <Header />
         <main>
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <section className="form-register">
-                    <h1>Register</h1>
+                    <h1>Modify User</h1>
                     <label htmlFor="userName">User Name</label>
                     <input className="inputs" type="text" {...register('names', {
                         required: true,
@@ -58,7 +57,7 @@ const Register = () => {
             </form>
         </main>
         <Footer />
-    </>;
+    </>);
 
 }
-export default Register;
+export default Profile;

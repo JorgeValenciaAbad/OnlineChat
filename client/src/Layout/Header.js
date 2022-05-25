@@ -21,7 +21,9 @@ export const Header = () => {
             
             <NavLink exact to="/" className={(navData) => (navData.isActive ? "active" : '')} >Home</NavLink>
             { isLogged ?
-            <button onClick={logout}>Logout</button>
+           <><NavLink exact to="/chat" className={(navData) => (navData.isActive ? "active" : '')}>Chat </NavLink>
+            <NavLink exact to="/profile" className={(navData) => (navData.isActive ? "active" : '')}>Profile</NavLink>
+            <button onClick={logout}>Logout</button></>
             :
             <>
             <NavLink exact to="/register" className={(navData) => (navData.isActive ? "active" : '')}>Register </NavLink>
