@@ -1,183 +1,348 @@
 @import url('https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Roboto&display=swap');
 
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 
 }
 
 #root {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 h1,
 h2,
 h3 {
-    font-family: 'Grape Nuts';
+  font-family: 'Grape Nuts';
 }
 
 h4,
 p {
-    font-family: 'Roboto';
+  font-family: 'Roboto';
 }
 
 .cover-container {
-    height: 100vh;
-    width: 100%;
-    object-fit: contain;
-    background-color: rgb(22, 22, 22, 0.3);
+  height: 100vh;
+  width: 100%;
+  object-fit: contain;
+  background-color: rgb(22, 22, 22, 0.3);
 }
 
 .normalHeader {
-    background-color: #161616;
+  background-color: #161616;
 }
 
 .video {
-    object-fit: cover;
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    z-index: -1;
+  object-fit: cover;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: -1;
 }
-main{
-    height: 70vh;
-    margin: 2.55rem;
+
+main {
+  height: 70vh;
+  margin: 2.55rem;
 }
+
 header {
-    padding: 2rem;
-    display: flex;
-    justify-content: space-between;
-    font-family: 'Roboto';
-    background-color: #161616;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Roboto';
+  background-color: #161616;
 
 }
 
 .title {
-    display: flex;
+  display: flex;
 
 }
 
 .title img {
-    max-width: 50px;
+  max-width: 50px;
 }
 
 .title h1,
 .cover-container h1 {
 
-    color: aliceblue;
+  color: aliceblue;
 }
 
 .cover-container2 {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 2rem;
-    height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2rem;
+  height: 100vh;
 }
 
 .image img {
-    max-width: 900px;
-    margin: 2rem;
+  max-width: 900px;
+  margin: 2rem;
 }
 
 .info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
 }
 
 .info h1 {
-    font-size: 4rem;
-    color: aliceblue;
+  font-size: 4rem;
+  color: aliceblue;
 }
 
 .info p {
-    font-size: 2rem;
-    color: aliceblue;
+  font-size: 2rem;
+  color: aliceblue;
 }
 
 @media (max-width: 600px) {
 
-    .info h1 {
-        font-size: 2rem;
-        color: aliceblue;
-    }
-    
-    .info p {
-        font-size: 1rem;
-        color: aliceblue;
-    }
-    }
-.hidden {
-    display: none;
-}
-.hambur-logo{
-    color: aliceblue;
-    font-size: 2.5em;
-}
-nav a , nav button{
-    color: white;
-    text-decoration: none;
-    padding: 0 2rem;
+  .info h1 {
     font-size: 2rem;
-    margin: 2rem;
-    background: none;
-    border: none;
+    color: aliceblue;
+  }
+
+  .info p {
+    font-size: 1rem;
+    color: aliceblue;
+  }
+  main{
+    margin: 0;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.hambur-logo {
+  color: aliceblue;
+  font-size: 2.5em;
+}
+
+nav a,
+nav button {
+  color: white;
+  text-decoration: none;
+  padding: 0 2rem;
+  font-size: 2rem;
+  margin: 2rem;
+  background: none;
+  border: none;
 }
 
 nav .active {
-    color: rgb(225, 146, 0);
-    font-weight: bold;
+  color: rgb(225, 146, 0);
+  font-weight: bold;
 
 }
-footer{
-    background-color: #161616;
-    color: white;
-    display: flex;
-    justify-content: space-around;
+
+footer {
+  background-color: #161616;
+  color: white;
+  display: flex;
+  justify-content: space-around;
 }
-.footer-item{
-    padding: 2rem;
-    color:white;
-    font-size: 20px;
-    display: flex;
-    justify-content: space-around;
-    max-width: 300px;
-    width: 100%;
+
+.footer-item {
+  padding: 2rem;
+  color: white;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-around;
+  max-width: 300px;
+  width: 100%;
 }
 
 
 .form-register {
-    max-width: 400px;
-    padding: 1rem;
-    margin: auto;
-    font-family: "Roboto";
+  max-width: 400px;
+  padding: 1rem;
+  margin: auto;
+  font-family: "Roboto";
 }
 
 .form-register h1 {
-    font-size: 2rem;
-    text-align: center;
-    margin: 2rem 0;
+  font-size: 2rem;
+  text-align: center;
+  margin: 2rem 0;
 }
 
 .inputs {
-    display: block;
-    width: 100%;
-    padding: 0.5rem;
-    margin: 0.5rem 0;
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
 
 }
 
 .form-register button {
-    width: 100%;
-    margin: 1rem 0;
-    padding: 0 0.5rem;
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0 0.5rem;
 }
-.error{
-    color:red;
-    font-weight: bold;
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.toregister {
+  text-align: center;
+}
+
+/* 
+asdad
+asdasd */
+
+.chat-window {
+  max-height: 100vh;
+  width: 100%;
+}
+
+.chat-window p {
+  margin: 0;
+}
+
+.chat-window .chat-header {
+  height: 45px;
+  background: #151b1f;
+}
+
+.chat-window .chat-header p {
+  display: block;
+  padding: 0 1em 0 2em;
+  color: #aeb785;
+  font-weight: 700;
+  line-height: 45px;
+}
+
+.chat-window .chat-body {
+  height: calc(650px - (45px + 70px));
+  border: 1px solid #263238;
+  background-color: #aeb785;
+  position: relative;
+}
+
+.chat-window .chat-body .message-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.chat-window .chat-body .message-container::-webkit-scrollbar {
+  display: none;
+}
+
+.chat-window .chat-body .message {
+  height: auto;
+  padding: 10px;
+  display: flex;
+}
+
+.chat-window .chat-body .message .message-content {
+  width: auto;
+  min-height: 40px;
+  color: #161616;
+  display: flex;
+  align-items: center;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+#you {
+  justify-content: flex-end;
+}
+.bubble{
+  border: 1px solid #151b1f;
+  padding: 0.5rem;
+  border-radius: 0.2rem
+}
+#you .bubble {
+  background-color: #fff;
+}
+
+#other .bubble {
+  background-color:#aab98d;
+}
+
+#you .message-content {
+  justify-content: flex-end;
+}
+
+#you .message-meta {
+  justify-content: flex-end;
+  margin-left: 5px;
+}
+
+#other {
+  justify-content: flex-start;
+}
+
+#other .message-content {
+  justify-content: flex-start;
+}
+
+#other .message-meta {
+  justify-content: flex-start;
+  margin-right: 5px;
+}
+
+.message-meta #author {
+  margin-left: 10px;
+  font-weight: bold;
+  color: #000;
+}
+
+.chat-window .chat-body .message .message-meta {
+  display: flex;
+  font-size: 12px;
+}
+
+.chat-window .chat-footer {
+  height: 40px;
+  border: 1px solid #263238;
+  border-top: none;
+  display: flex;
+}
+
+.chat-window .chat-footer input {
+  height: 100%;
+  flex: 85%;
+  border: 0;
+  padding: 0 0.7em;
+  font-size: 1em;
+  border-right: 1px dotted #607d8b;
+
+  outline: none;
+  font-family: "Open Sans", sans-serif;
+}
+
+.chat-window .chat-footer button {
+  border: 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex: 15%;
+  height: 100%;
+  background: transparent;
+  outline: none;
+  font-size: 25px;
+  color: lightgray;
+}
+
+.chat-window .chat-footer button:hover {
+  color: #43a047;
+}
+
+.hide {
+  opacity: 0 !important;
 }

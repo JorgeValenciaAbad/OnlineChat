@@ -1,4 +1,5 @@
 
+
 import { useContext, useCallback, useState } from 'react'
 import Context from '../context/UserContext'
 
@@ -7,7 +8,6 @@ export default function useUser() {
     const [state, setState] = useState({ loading: false, error: false });
 
     const login = async (names, passwd) => {
-        
         if (names != "" && passwd != "") {
             setState({ loading: true, error: false })
             const res = await fetch("http://localhost:3000/api/login", {
@@ -27,7 +27,7 @@ export default function useUser() {
             }).then(res => {
                 setState({ loading: false, error: false })
                 setJWT(res);
-                window.sessionStorage.setItem("jwt", res)
+                window.sessionStorage.setItem("jwt",res);
             }).catch(err =>{
                 window.sessionStorage.removeItem("jwt")
                 setState({ loading: false, error: true });
@@ -48,8 +48,9 @@ export default function useUser() {
                 body: JSON.stringify({ names, email, passwd, token})
             }).then(res => {
                 if (!res.ok) {
-                    setState({ loading: false, error: true })
-                    throw new Error('Response is NOT ok')
+                    window.sessionStorage.removeItem('jwt');
+                    setState({ loading: false, error: true });
+                    throw new Error('Response is NOT ok');
                 }
                 return res.json()
 
@@ -60,6 +61,7 @@ export default function useUser() {
                 
             }).catch(err =>{
                 setState({ loading: false, error: true });
+                window.sessionStorage.removeItem('jwt');
                 console.log(err)
             })
         }
@@ -68,6 +70,7 @@ export default function useUser() {
     const logout = useCallback(() => {
 
         setJWT(null)
+        window.sessionStorage.removeItem('jwt');
 
     }, [setJWT]);
 

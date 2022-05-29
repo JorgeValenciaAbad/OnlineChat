@@ -35,6 +35,7 @@ const Login = () => {
                     <input className="inputs" type="text" {...register("names")}  id="userName" placeholder="User Name" />
                     <label htmlFor="passwd">Password</label>
                     <input className="inputs" type="password" {...register("passwd")}  id="passwd" placeholder="Password" />
+                    <p className="toregister">If you don't have an account you can register by clicking <a href="/register">here</a>.</p>
                     <button type="submit">Log In</button>
                 </section>
             </form>
