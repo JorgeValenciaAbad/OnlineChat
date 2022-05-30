@@ -1,4 +1,4 @@
-//const Pool = require('pg').Pool;
+
 import pg from "pg";
 const Pool = pg.Pool;
 
