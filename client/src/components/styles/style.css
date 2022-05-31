@@ -168,6 +168,16 @@ footer {
   margin: auto;
   font-family: "Roboto";
 }
+.form-register button{
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+}
+.form-register button:hover{
+  color:#c29c54;
+  font-size: 1.5rem;
+  transition: 1s;
+}
 
 .form-register h1 {
   font-size: 2rem;
@@ -198,9 +208,6 @@ footer {
   text-align: center;
 }
 
-/* 
-asdad
-asdasd */
 
 .chat-window {
   max-height: 100vh;
@@ -219,7 +226,7 @@ asdasd */
 .chat-window .chat-header p {
   display: block;
   padding: 0 1em 0 2em;
-  color: #aeb785;
+  color: #c29c54;
   font-weight: 700;
   line-height: 45px;
 }
@@ -227,8 +234,7 @@ asdasd */
 .chat-window .chat-body {
   height: calc(650px - (45px + 70px));
   border: 1px solid #263238;
-  background-color: #aeb785;
-  position: relative;
+  background-color: #acacac98;
 }
 
 .chat-window .chat-body .message-container {
@@ -271,7 +277,7 @@ asdasd */
 }
 
 #other .bubble {
-  background-color:#aab98d;
+  background-color:#c29c54;
 }
 
 #you .message-content {
@@ -320,12 +326,16 @@ asdasd */
   border: 0;
   padding: 0 0.7em;
   font-size: 1em;
-  border-right: 1px dotted #607d8b;
+  border-right: 1px dotted #263238;
 
   outline: none;
   font-family: "Open Sans", sans-serif;
 }
-
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
 .chat-window .chat-footer button {
   border: 0;
   display: grid;
@@ -340,7 +350,7 @@ asdasd */
 }
 
 .chat-window .chat-footer button:hover {
-  color: #43a047;
+  color: #c29c54;
 }
 
 .hide {

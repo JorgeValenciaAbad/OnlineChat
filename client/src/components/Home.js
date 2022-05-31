@@ -20,7 +20,7 @@ const Home = () => {
             <p>about different themes</p></>}
         </div>
     </div>
-
+    
     </>;
     
 }

@@ -35,37 +35,38 @@ app.post("/users", async (req, res) => {
 });
 app.post("/api/add", async (req, res) => {
     try {
-        const { name, passwd, type } = req.body;
+        const { name, passwd, type, id } = req.body;
+        console.log(id);
         if (type === "P") {
-            const publicRoom = await pool.query("INSERT INTO rooms (name, type_room) VALUES( $1, $2)", [name, type]);
+            const publicRoom = await pool.query("INSERT INTO rooms (name, type_room, users) VALUES( $1, $2, $3)", [name, type, id]);
             res.json(publicRoom.rows[0]);
         } else {
-            const privateRoom = await pool.query("INSERT INTO rooms (name, passwd,type_room) VALUES( $1, md5($2), $3)", [name, passwd, type]);
+            const privateRoom = await pool.query("INSERT INTO rooms (name, passwd,type_room, users) VALUES( $1, md5($2), $3, $4)", [name, passwd, type, id]);
             res.json(privateRoom.rows[0]);
         }
     } catch (err) {
         console.log(err);
     }
 });
-app.post ("/api/loginroom", async (req, res) =>{
+app.post("/api/loginroom", async (req, res) => {
     try {
         const { name, passwd } = req.body;
         const loginroom = await pool.query("SELECT * FROM rooms WHERE name = $1 AND passwd = md5($2)", [name, passwd]);
-        if (loginroom.rowCount>0){
+        if (loginroom.rowCount > 0) {
             res.json();
-        }else{
-            res.status(404).json()
+        } else {
+            res.status(403).json()
         }
-        
+
     } catch (err) {
         console.log(err);
     }
 })
-app.get ("/api/rooms/:type", async (req, res) =>{
+app.get("/api/rooms/:type", async (req, res) => {
     try {
-        const {type} = req.params;
+        const { type } = req.params;
         const getRooms = await pool.query("SELECT name, passwd FROM rooms WHERE type_room = $1", [type]);
-        res.json(getRooms.rows)
+        res.json(getRooms.rows);
     } catch (err) {
         console.log(err);
     }
@@ -75,6 +76,24 @@ app.post("api/delete", async (req, res) => {
         const { name } = req.body;
         const newTodo = await pool.query("DELETE FROM rooms WHERE name = $1;", [name]);
         res.json(newTodo.rows[0]);
+    } catch (err) {
+        console.log(err);
+    }
+});
+app.get("/api/room/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const erase = await pool.query("SELECT * FROM rooms WHERE users = $1;", [id]);
+        res.json(erase.rows);
+    } catch (err) {
+        console.log(err);
+    }
+});
+app.post("/api/erase", async (req, res) => {
+    try {
+        const { name } = req.body;
+        const erase = await pool.query("DELETE FROM rooms WHERE name = $1;", [name]);
+        res.json(erase.rows[0]);
     } catch (err) {
         console.log(err);
     }
@@ -160,8 +179,8 @@ io.on("connection", socket => {
     });
     socket.on("send_message", (data) => {
         socket.to(data.room).emit("receive_message", data);
-      });
+    });
     socket.on("disconnect", () => {
         console.log("User Disconnected", socket.id);
-      }); 
+    });
 });

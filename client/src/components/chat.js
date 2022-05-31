@@ -65,7 +65,6 @@ export default function Chat({ socket, username, nameRoom }) {
             <div className="chat-footer">
                 <input type="text" value={currentMessage} placeholder="Message" onChange={(event) => { setCurrentMessage(event.target.value);}} onKeyPress={(event) => {event.key === "Enter" && sendMessage();}}/>
                 <button onClick={sendMessage}><AiOutlineSend/></button>
-                <button onClick={disconnect}><FiLogOut/></button>
             </div>
         </div>
 

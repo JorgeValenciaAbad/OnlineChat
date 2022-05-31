@@ -23,7 +23,8 @@ export const Header = () => {
             { isLogged ?
            <>
             <NavLink exact to="/joinroom" className={(navData) => (navData.isActive ? "active" : '')}>Join Room</NavLink>
-            <NavLink exact to="/createroom" className={(navData) => (navData.isActive ? "active" : '')}>Create Room </NavLink>
+            <NavLink exact to="/createroom" className={(navData) => (navData.isActive ? "active" : '')}>Create Room</NavLink>
+            <NavLink exact to="/deleteroom" className={(navData) => (navData.isActive ? "active" : '')}>Delete Room</NavLink>
             <NavLink exact to="/profile" className={(navData) => (navData.isActive ? "active" : '')}>Profile</NavLink>
             
             <button onClick={logout}>Logout</button></>

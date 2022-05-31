@@ -1,36 +1,33 @@
 import React from "react";
 import { Footer } from "../Layout/footer";
 import { Header } from "../Layout/Header";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import useUser from "../hooks/useUser";
-import io from "socket.io-client";
+import { useState } from "react";
 import Chat from './Chat'
 import User from '../hooks/user'
-import Table from "../hooks/Table";
+import Table from "../hooks/useTable";
 import Rooms from "../hooks/Rooms";
 
-const JoinRoom = () => {
-    const { isLogged } = useUser();
+const JoinRoom = (socket) => {
     const { names, get } = User();
     const { check, flag } = Rooms()
-    const navigate = useNavigate();
+    const { list, getRooms} = Table();
     const [nameRoom, setName] = useState();
     const [passwdRoom, setPasswd] = useState();
-    const [socket, setSocket] = useState(io());
     const [type, setType] = useState("P");
     const [showChat, setValue] = useState(false);
     const [error, setError] = useState(false);
     get();
+    getRooms();
     const joinroom = async () => {
 
         switch (type) {
             case "P":
-                if (nameRoom !== "") {
+                if (nameRoom !== "" && nameRoom !== undefined) {
 
                     console.log(nameRoom);
-                    console.log(socket);
-                    socket.emit("join_room", nameRoom);
+                    console.log(socket.socket);
+
+                    socket.socket.emit("join_room", nameRoom);
                     setValue(true);
                 } else {
                     setError(true);
@@ -39,7 +36,7 @@ const JoinRoom = () => {
             case "S":
                 check(nameRoom, passwdRoom);
                 if (flag) {
-                    socket.emit("join_room", nameRoom);
+                    socket.socket.emit("join_room", nameRoom);
                     setValue(true);
                 } else {
                     setError(true);
@@ -47,16 +44,9 @@ const JoinRoom = () => {
                 break;
         }
     }
-    useEffect(() => {
-        if (!isLogged) {
-            alert("You have to log in to access this part of the page.");
-            setSocket(null);
-            navigate("/login");
-        }
-    }, [isLogged, navigate]);
     return (<>
         <Header />
-        <main>{showChat ? <Chat socket={socket} username={names} nameRoom={nameRoom} />
+        <main>{showChat ? <Chat socket={socket.socket} username={names} nameRoom={nameRoom} />
             : <>
                 <section className="form-register">
 
@@ -74,16 +64,29 @@ const JoinRoom = () => {
 
                     {type === "P" ?
                         <>
-                            <label htmlFor="name">Name Room</label>
-                            <input className="inputs" type="text" placeholder="My Room..." id="name" onChange={(event) => { setName(event.target.value); }} />
-                            <button onClick={joinroom}>Join A Room</button></>
+                            <table>
+                                <tr>
+                                    <th>Room Name</th>
+                                    <th>Action</th>
+                                </tr>
+                                {list.map((room) => {
+                                    return ( <tr>
+                                        <td>{room.name}</td>
+                                        <td><button onClick={() => {
+                                            setName(room.name);
+                                            joinroom();
+                                        }}>Join</button></td>
+                                    </tr>)
+                                })}
+                            </table>
+                        </>
                         :
                         <>
                             <label htmlFor="name">Name Room</label>
                             <input className="inputs" type="text" placeholder="My Room..." id="" onChange={(event) => { setName(event.target.value); }} />
                             <label htmlFor="name">Password</label>
                             <input className="inputs" type="password" placeholder="Password" onChange={(event) => { setPasswd(event.target.value); }} />
-                            <button onClick={joinroom}>Join A Room</button>
+                            <button onClick={joinroom}>Join</button>
                         </>}
                 </section>
             </>

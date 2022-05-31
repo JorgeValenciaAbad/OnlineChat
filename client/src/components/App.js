@@ -2,7 +2,8 @@ import React from "react";
 import Home from "./Home"
 import Register from "./register"
 import Login from "./Login"
-import JoinRoom from "./JoinRoom"
+import Connection from "./Conection";
+import DeleteRoom from './DeleteRooms';
 import Profile from "./profile"
 import {
     BrowserRouter as Router,
@@ -21,7 +22,8 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/createroom" element={<CreateRoom />} />
-                    <Route path="/joinroom" element={<JoinRoom />} />
+                    <Route path="/deleteroom" element={<DeleteRoom />} />
+                    <Route path="/joinroom" element={<Connection />} />
                     <Route path="/profile" element={<Profile />} />
                 </Routes>
 
