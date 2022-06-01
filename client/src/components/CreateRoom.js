@@ -63,7 +63,7 @@ return (<>
         <>
           <label htmlFor="type">Room Name</label>
           <input className="inputs" type="text" placeholder="My Room..." onChange={(event) => { setName(event.target.value); }} />
-          <button onClick={createRoom}>Join A Room</button>
+          <button onClick={createRoom}>Create</button>
 
         </>
         :
@@ -71,8 +71,8 @@ return (<>
           <label htmlFor="type">Room Name</label>
           <input className="inputs" type="text" placeholder="My Room..." onChange={(event) => { setName(event.target.value); }} />
           <label htmlFor="type">Room Password</label>
-          <input className="inputs" type="password" placeholder="Password" onChange={(event) => { setPasswd(event.target.value); }} />
-          <button onClick={createRoom}>Join A Room</button>
+          <input className="inputs" type="password" placeholder="Pcassword" onChange={(event) => { setPasswd(event.target.value); }} />
+          <button onClick={createRoom}>Create</button>
         </>}
     </section>
   </main>

@@ -17,8 +17,9 @@ const Register = () => {
             });
             if (response.status === 200) {
                 navigate("/login", { replace: true })
+            }else{
+                navigate("/register", { replace: true });
             }
-            navigate("/register", { replace: true });
         } catch (error) {
             console.log(error.message)
         }

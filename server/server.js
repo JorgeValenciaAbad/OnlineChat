@@ -83,8 +83,11 @@ app.post("api/delete", async (req, res) => {
 app.get("/api/room/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        const erase = await pool.query("SELECT * FROM rooms WHERE users = $1;", [id]);
-        res.json(erase.rows);
+        if (id !== undefined && id !== null) {
+            const erase = await pool.query("SELECT * FROM rooms WHERE users = $1;", [id]);
+            res.json(erase.rows);
+        }
+        res.json()
     } catch (err) {
         console.log(err);
     }
